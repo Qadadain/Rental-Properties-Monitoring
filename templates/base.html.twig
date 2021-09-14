@@ -8,19 +8,19 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+    {% block header %}
+        {% include 'Components/_navbar.html.twig' %}
+    {% endblock %}
     </head>
     <body >
+    <section id="content-wrapper">
         {% block body %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">1</div>
-                    <div class="col-4">2</div>
-                    <div class="col-4">3</div>
-                </div>
-            </div>
         {% endblock %}
+    </section>
+    </div>
     </body>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('navbar') }}
+        {% endblock %}
 </html>
