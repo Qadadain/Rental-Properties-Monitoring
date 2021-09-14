@@ -34,6 +34,11 @@ class OperationType
      */
     private $rentalPropertyAccountings;
 
+    public function __toString()
+    {
+        return $this->type;
+    }
+
     public function __construct()
     {
         $this->propertyAccountings = new ArrayCollection();

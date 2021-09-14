@@ -29,6 +29,11 @@ class RentalPropertyType
      */
     private $rentalProperty;
 
+    public function __toString()
+    {
+        return $this->type;
+    }
+
     public function __construct()
     {
         $this->rentalProperty = new ArrayCollection();
