@@ -50,6 +50,11 @@ class Tenant
      */
     private $rentalProperty;
 
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
     public function __construct()
     {
         $this->rentReceipts = new ArrayCollection();

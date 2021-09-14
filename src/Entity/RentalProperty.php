@@ -51,6 +51,11 @@ class RentalProperty
      */
     private $tenants;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->rentalPropertyAccounting = new ArrayCollection();
