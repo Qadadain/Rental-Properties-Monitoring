@@ -6,10 +6,11 @@
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('navbar') }}
         {% endblock %}
 
     {% block header %}
-        {% include 'Components/_navbar.html.twig' %}
+        {% include '_Components/_navbar.html.twig' %}
     {% endblock %}
     </head>
     <body >
@@ -22,5 +23,6 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {{ encore_entry_script_tags('navbar') }}
+            {{ encore_entry_script_tags('datepicker') }}
         {% endblock %}
 </html>
