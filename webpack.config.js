@@ -26,6 +26,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('navbar', './assets/js/navbar.js')
+    .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('clickableTable', './assets/js/clickableTable.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

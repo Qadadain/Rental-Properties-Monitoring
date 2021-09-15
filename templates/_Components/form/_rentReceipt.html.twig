@@ -1,0 +1,34 @@
+{{ form_start(form) }}
+<div class="container">
+    <div class="col-6 offset-3">
+
+        {{ form_label(form.rent) }}
+        {{ form_widget(form.rent) }}
+
+        {{ form_label(form.advancesOnCharges) }}
+        {{ form_widget(form.advancesOnCharges) }}
+
+        {{ form_label(form.total) }}
+        {{ form_widget(form.total) }}
+
+        {{ form_label(form.startRent) }}
+        {{ form_widget(form.startRent) }}
+
+        {{ form_label(form.endRent) }}
+        {{ form_widget(form.endRent) }}
+
+        {{ form_label(form.rentalNumber) }}
+        {{ form_widget(form.rentalNumber) }}
+
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+
+        {{ form_label(form.tenant) }}
+        {{ form_widget(form.tenant) }}
+
+        <div class="col-12 d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-outline-info">Ajouter</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
