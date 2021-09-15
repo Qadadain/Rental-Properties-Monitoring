@@ -19,32 +19,19 @@ class PropertyAccountingRepository extends ServiceEntityRepository
         parent::__construct($registry, PropertyAccounting::class);
     }
 
-    // /**
-    //  * @return PropertyAccounting[] Returns an array of PropertyAccounting objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function totalPropertyAccounting()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->select('SUM(p.value)')
+            ->getQuery()->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?PropertyAccounting
+    public function sumByLabel($label)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('pa')
+            ->select('SUM(pa.value)')
+            ->andWhere('pa.label = :label')
+            ->setParameter('label', $label)
+            ->getQuery()->getResult();
     }
-    */
 }

@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+            <h1>Loca-gestion</h1>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6 col-12">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fab fa-4x fa-leanpub leanpub-color"></i>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="h4 text-center">
+                            Compta biens
+                        </h2>
+                        {{ render_chart(propertiesChart) }}
+                        <p>{{ sumPropertyAccounting |format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-12">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fas fa-4x fa-wallet wallet-color"></i>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="h4 text-center">Compta locations</h2>
+                        {{ render_chart(rentalPropertiesChart) }}
+                        <p>{{ sumRentalPropertyAccounting |format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fa fa-4x fa-building building-color"></i>
+                    </div>
+                    <div class="content-card h-140">
+                        <h2 class="h4 text-center">
+                            Nombre de biens
+                        </h2>
+                        <p>{{ locationsCount }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fa fa-4x fa-key key-color"></i>
+                    </div>
+                    <div class="content-card h-140">
+                        <h2 class="h4 text-center">
+                            Nombre de locations
+                        </h2>
+                        <p>{{ propertiesCount }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fas fa-4x fa-users cardIcon"></i>
+                    </div>
+                    <div class="content-card h-140">
+                        <h2 class="h4 text-center">
+                            Nombre de locataire
+                        </h2>
+                        <p>{{ tenantsCount }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fa fa-4x fa-file-pdf pdf-color"></i>
+                    </div>
+                    <div class="content-card h-140">
+                        <h2 class="h4 text-center">
+                            Nombre de Quittance
+                        </h2>
+                        <p>{{ rentReceiptsCount }}</p>
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
