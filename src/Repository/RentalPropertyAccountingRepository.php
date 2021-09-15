@@ -19,32 +19,19 @@ class RentalPropertyAccountingRepository extends ServiceEntityRepository
         parent::__construct($registry, RentalPropertyAccounting::class);
     }
 
-    // /**
-    //  * @return RentalPropertyAccounting[] Returns an array of RentalPropertyAccounting objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function totalRentalPropertyAccounting()
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('rpa')
+            ->select('SUM(rpa.value)')
+            ->getQuery()->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?RentalPropertyAccounting
+    public function sumByLabel($label)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return$this->createQueryBuilder('rpa')
+            ->select('SUM(rpa.value)')
+            ->andWhere('rpa.label = :label')
+            ->setParameter('label', $label)
+            ->getQuery()->getResult();
     }
-    */
 }

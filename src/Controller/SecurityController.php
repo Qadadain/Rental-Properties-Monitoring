@@ -82,7 +82,7 @@ class SecurityController extends AbstractController
                 ->from($this->getParameter('mailer_from'))
                 ->to($user->getEmail())
                 ->subject('Reset password')
-                ->htmlTemplate('email/resetEmail.html.twig')
+                ->htmlTemplate('security/resetEmail.html.twig')
                 ->context([
                     'token' => $url,
                 ]);
