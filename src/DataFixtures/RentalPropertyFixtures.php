@@ -3,13 +3,19 @@
 namespace App\DataFixtures;
 
 use App\Entity\RentalProperty;
-use App\Entity\RentalPropertyType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RentalPropertyFixtures extends Fixture implements DependentFixtureInterface
 {
+    protected $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
 
     public function getDependencies(): array
     {
@@ -63,7 +69,8 @@ class RentalPropertyFixtures extends Fixture implements DependentFixtureInterfac
             $property = rand(1,3);
             $propertyType = rand(1,4);
             $rentalProperty->setName($data['name'])
-                ->setComment($data['comment']);
+                ->setComment($data['comment'])
+                ->setSlug($this->slugger->slug(strtolower($rentalProperty->getName())));
             $rentalProperty->setProperty($manager->find('App:Property', $property));
             $rentalProperty->setRentalPropertyType($manager->find('App:RentalPropertyType', $propertyType));
             $manager->persist($rentalProperty);

@@ -24,7 +24,6 @@ class PropertyCrudController extends AbstractCrudController
             TextField::new('city', 'Ville :'),
             TextField::new('address', 'Adresse :'),
             TextField::new('comment', 'Commentaire :'),
-            TextField::new('name', 'Nom :'),
         ];
     }
 
