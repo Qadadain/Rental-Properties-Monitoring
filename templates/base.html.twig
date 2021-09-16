@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            {{ encore_entry_link_tags('navbar') }}
-        {% endblock %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('navbar') }}
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+    {% block stylesheets %}
+    {% endblock %}
 
     {% block header %}
         {% include '_Components/_navbar.html.twig' %}
     {% endblock %}
-    </head>
-    <body >
-    <section id="content-wrapper">
-        {% block body %}
-        {% endblock %}
-    </section>
-    </div>
-    </body>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('navbar') }}
-            {{ encore_entry_script_tags('datepicker') }}
-        {% endblock %}
+</head>
+<body>
+<section id="content-wrapper">
+    {% block body %}
+    {% endblock %}
+</section>
+</div>
+</body>
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('navbar') }}
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+{% block javascripts %}
+{% endblock %}
 </html>

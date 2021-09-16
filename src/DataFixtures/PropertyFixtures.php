@@ -5,9 +5,17 @@ namespace App\DataFixtures;
 use App\Entity\Property;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PropertyFixtures extends Fixture
 {
+    protected $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public const PROPERTY = [
         [
             'name' => 'Localisation ABC',
@@ -36,7 +44,8 @@ class PropertyFixtures extends Fixture
             $property->setName($data['name'])
                 ->setCity($data['city'])
                 ->setAddress($data['address'])
-                ->setComment($data['comment']);
+                ->setComment($data['comment'])
+                ->setSlug($this->slugger->slug(strtolower($property->getName())));
 
             $manager->persist($property);
         }
