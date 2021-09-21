@@ -82,7 +82,7 @@ class HomeController extends AbstractController
         $rentReceipts = $rentReceipts->findAll();
         $tenantsCount = count($tenants);
         $propertiesCount = count($properties);
-        $locationsCount = count($rentalProperties);
+        $rentalPropertyCount = count($rentalProperties);
         $rentReceiptsCount = count($rentReceipts);
 
         $totalPropertyAccounting = ($propertyAccounting->totalPropertyAccounting()[1]);
@@ -92,7 +92,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
             'tenantsCount' => $tenantsCount,
-            'locationsCount' => $locationsCount,
+            'rentalPropertiesCount' => $rentalPropertyCount,
             'propertiesCount' => $propertiesCount,
             'sumPropertyAccounting' => $totalPropertyAccountingTwig,
             'sumRentalPropertyAccounting' => $totalRentalPropertyAccounting,

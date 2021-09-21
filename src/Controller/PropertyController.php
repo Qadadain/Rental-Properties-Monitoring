@@ -18,6 +18,34 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class PropertyController extends AbstractController
 {
     /**
+     * @Route("/", name="index")
+     */
+    public function propertyList(EntityManagerInterface $em): Response
+    {
+        $properties = $em->getRepository('App:Property');
+
+
+        return $this->render('index/property.html.twig', [
+            'properties' => $properties->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/{slug}", name="show")
+     */
+    public function show(Property $property, EntityManagerInterface $em): Response
+    {
+        $rentalProperties = $em->getRepository('App:RentalProperty')->findBy(['property' => $property]);
+
+
+        return $this->render('show/property.html.twig', [
+            'property' => $property,
+            'rentalProperties' => $rentalProperties,
+        ]);
+    }
+
+
+    /**
      * @Route ("/add", name="add")
      * @param EntityManagerInterface $em
      * @param Request $request
@@ -39,4 +67,6 @@ class PropertyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Location;
 use App\Entity\Property;
 use App\Entity\PropertyAccounting;
 use App\Form\PropertyAccountingType;
