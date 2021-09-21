@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">{{ property.name }} - {{ property.city }}</div>
+        <div class="row">
+            {% for rentalProperty in rentalProperties %}
+                <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
+                    <div class="col-4">
+                        {{ rentalProperty.name }}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

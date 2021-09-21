@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Property;
 use App\Entity\RentalProperty;
 use App\Form\RentalPropertyType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,4 +41,17 @@ class RentalPropertyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{slug}", name="show")
+     */
+    public function show(RentalProperty $rentalProperty): Response
+    {
+
+
+        return $this->render('show/rentalProperty.html.twig', [
+            'rentalProperty' => $rentalProperty,
+        ]);
+    }
+
 }

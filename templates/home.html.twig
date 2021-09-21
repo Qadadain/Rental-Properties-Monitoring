@@ -28,7 +28,7 @@
                             </a>
                         </div>
                         <div class="col-6 p-0">
-                            <a href="" class="link">
+                            <a href="{{ path('Property_Accounting_add') }}" class="link">
                                 <i class="fas fa-lg fa-plus-circle"></i>
                             </a>
                         </div>
@@ -53,7 +53,7 @@
                             </a>
                         </div>
                         <div class="col-6 p-0">
-                            <a href="" class="link">
+                            <a href="{{ path('Rental_Property_Accounting_add') }}" class="link">
                                 <i class="fas fa-lg fa-plus-circle"></i>
                             </a>
                         </div>
@@ -70,16 +70,16 @@
                         <h2 class="h4 text-center">
                             Nombre de biens
                         </h2>
-                        <p>{{ locationsCount }}</p>
+                        <p>{{ propertiesCount }}</p>
                     </div>
                     <div class="card-action-bar">
                         <div class="col-6 p-0">
-                            <a href="" class="link">
+                            <a href="{{ path('property_index') }}" class="link">
                                 <i class="fas fa-lg fa-list-ul"></i>
                             </a>
                         </div>
                         <div class="col-6 p-0">
-                            <a href="" class="link">
+                            <a href="{{ path('property_add') }}" class="link">
                                 <i class="fas fa-lg fa-plus-circle"></i>
                             </a>
                         </div>
@@ -96,7 +96,7 @@
                         <h2 class="h4 text-center">
                             Nombre de locations
                         </h2>
-                        <p>{{ propertiesCount }}</p>
+                        <p>{{ rentalPropertiesCount }}</p>
                     </div>
                     <div class="card-action-bar">
                         <div class="col-6 p-0">
