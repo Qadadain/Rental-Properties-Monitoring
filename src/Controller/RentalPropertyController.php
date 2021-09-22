@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Property;
 use App\Entity\RentalProperty;
 use App\Form\RentalPropertyType;
 use Doctrine\ORM\EntityManagerInterface;

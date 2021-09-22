@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 /**
  * @Route("/bien", name="property_")
@@ -25,6 +27,7 @@ class PropertyController extends AbstractController
         $properties = $em->getRepository('App:Property');
 
 
+
         return $this->render('index/property.html.twig', [
             'properties' => $properties->findAll(),
         ]);
@@ -33,14 +36,49 @@ class PropertyController extends AbstractController
     /**
      * @Route("/{slug}", name="show")
      */
-    public function show(Property $property, EntityManagerInterface $em): Response
+    public function show(Property $property, EntityManagerInterface $em, ChartBuilderInterface $chartBuilder): Response
     {
-        $rentalProperties = $em->getRepository('App:RentalProperty')->findBy(['property' => $property]);
 
+        $rentalPropertiesRep = $em->getRepository('App:RentalProperty');
+        $labelRep = $em->getRepository('App:Label');
+        $propertyAccounting = $em->getRepository('App:PropertyAccounting');
+
+        $rentalProperties = $rentalPropertiesRep->findBy(['property' => $property]);
+        $propertyId = $property->getId();
+        $labels = $labelRep->findAll();
+        $labelNames = [];
+        $labelColors = [];
+        $propertySumByLabel = [];
+
+        foreach ($labels as $label)
+        {
+            $labelId = $label->getId();
+            $labelColors[] = $label->getColor();
+            $labelNames[] = $label->getName();
+            $propertySumByLabel[] = $propertyAccounting->getPropertySum($labelId, $propertyId);
+        }
+
+
+        $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
+        $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
+
+        $propertyAccountingChart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $propertyAccountingChart->setData([
+            'labels' => $labelNames,
+            'datasets' => [
+                [
+                    'label' => 'My First dataset',
+                    'backgroundColor' => $labelColors,
+                    'borderColor' => '#343a40',
+                    'data' => $propertySumByLabel,
+                ],
+            ],
+        ]);
 
         return $this->render('show/property.html.twig', [
             'property' => $property,
             'rentalProperties' => $rentalProperties,
+            'propertyAccountingChart' => $propertyAccountingChart,
         ]);
     }
 
