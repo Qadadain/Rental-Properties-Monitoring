@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/comptabilite-localisation", name="Rental_Property_Accounting_")
+ * @Route("/comptabilite-localisation", name="rental_property_accounting_")
  **/
 class RentalPropertyAccountingController extends AbstractController
 {

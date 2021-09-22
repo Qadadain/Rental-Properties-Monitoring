@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="row d-flex justify-content-around col-12">
-    <div class="col-3" style="display: contents;">
-    {% for property in properties %}
-        <a href="{{ path('property_show', {'slug': property.slug}) }}">
-            <ul class="list-group mt-3">
-                <li class="list-group-item">{{ property.name }} - {{ property.city }}</li>
-            </ul>
-        </a>
-    {% endfor %}
+    <div class="container">
+        <div class="row text-center">
+            <h1>Les biens</h1>
+        </div>
+        <div class="row d-flex justify-content-around col-12">
+            <div class="col-3" style="display: contents;">
+                {% for property in properties %}
+                    <a href="{{ path('property_show', {'slug': property.slug}) }}">
+                        <ul class="list-group mt-3">
+                            <li class="list-group-item">{{ property.name }} - {{ property.city }}</li>
+                        </ul>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
 
 {% endblock %}

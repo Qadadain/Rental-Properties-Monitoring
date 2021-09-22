@@ -1,14 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container">
-        <div class="row">{{ property.name }} - {{ property.city }}</div>
+        <div class="row text-center">
+            <h1>{{ property.name }} - {{ property.city }}</h1>
+        </div>
+
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6 col-12">
+                <div class="image-card image-card-topimage">
+                    <div class="image-card-topimage_header">
+                        <i class="fa fa-4x fa-building building-color"></i>
+                    </div>
+                    <div class="content-card">
+                        <h2 class="h4 text-center">
+                            Compta du bien
+                        </h2>
+                        {{ render_chart(propertyAccountingChart) }}
+                    </div>
+                    <div class="card-action-bar">
+                        <div class="col-6 p-0">
+                            <a href="{{ path('property_accounting_show', {'slug': property.slug}) }}" class="link">
+                                <i class="fas fa-lg fa-list-ul"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 p-0">
+                            <a href="{{ path('property_accounting_add') }}" class="link">
+                                <i class="fas fa-lg fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             {% for rentalProperty in rentalProperties %}
-                <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
-                    <div class="col-4">
-                        {{ rentalProperty.name }}
-                    </div>
-                </a>
+                <div class="col-4 text-center">
+
+                    <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
+                        <div class="">
+                            {{ rentalProperty.name }}
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>

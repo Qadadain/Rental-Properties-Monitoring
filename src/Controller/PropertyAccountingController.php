@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 /**
- * @Route("/comptabilite-bien", name="Property_Accounting_")
+ * @Route("/comptabilite-bien", name="property_accounting_")
  **/
 class PropertyAccountingController extends AbstractController
 {
