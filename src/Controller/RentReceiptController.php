@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\RentReceipt;
+use App\Entity\Tenant;
 use App\Form\RentReceiptType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,5 +34,26 @@ class RentReceiptController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{locataireFirstName}-{locataireLastName}-{id}", name="show")
+     */
+    public function getRentReceiptByTenant(Tenant $tenant, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
+    {
+        $rentReceiptRepository = $em->getRepository('App:RentReceipt');
+
+        $data = $rentReceiptRepository->findBy(['tenant' => $tenant], ['date' => 'desc']);
+
+        $rentReceipts = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
+        return $this->render('show/tenantRentReceipt.html.twig', [
+            'tenant' => $tenant,
+            'rentReceipts' => $rentReceipts,
+        ]);
+    }
+
 
 }

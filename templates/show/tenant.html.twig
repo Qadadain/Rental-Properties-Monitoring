@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+            <h1></h1>
+            {% for tenant in tenants %}
+                <a href="{{ path('rent_receipt_show', {'locataireFirstName': tenant.firstName, 'locataireLastName': tenant.lastName, 'id': tenant.id}) }}">
+                        <div class="card col-2">
+                            <table class="cardcontent">
+                                <tr>
+                                    <td style="padding: 7px;">
+                                        <div class="bluestick" style="background:black;"></div>
+                                    </td>
+                                    <td class="td2">
+                                        <strong class="name"> {{ tenant.firstName }} {{ tenant.lastName }}</strong>
+                                        <p class="data">
+                                            <span style="color: #666">{{ tenant.rentalProperty }}</span><br>
+                                            <span style="color: #666"
+                                                  class="mb-0">Date d'entrée : {{ tenant.entry|date("m/d/Y") }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </a>
+            {% endfor %}
+        </div>
+{% endblock %}
+
+

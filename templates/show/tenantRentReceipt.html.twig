@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="row d-flex justify-content-center">
+        <div class="my-4 text-center">
+            <i class="fa fa-5x mb-2 fa-file-pdf pdf-color"></i>
+            {% if rentReceipts is empty %}
+                <h3>Pas de Quittance de loyer pour {{ tenant.firstName }} {{ tenant.lastName }}</h3>
+                <div class="d-flex justify-content-center">
+                    <a href="{{ path('rent_receipt_add') }}">Ajouter une Quittance loyer</a>
+                </div>
+            {% else %}
+                <h1>Quitances de Loyer de {{ tenant.firstName }} {{ tenant.lastName }}</h1>
+        </div>
+    </div>
+        <div class="container wrapper">
+            <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th class="col-md-2">Loyer</th>
+                    <th class="col-md-2">Avances</th>
+                    <th class="col-md-2">total</th>
+                    <th class="col-md-2">Du</th>
+                    <th class="col-md-2">Au</th>
+                    <th class="col-md-2">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for rentReceipt in rentReceipts %}
+                    <tr data-link="" data-target="_BLANK" style="cursor: pointer">
+                        <td>{{ rentReceipt.rent }}</td>
+                        <td>{{ rentReceipt.advancesOnCharges }}</td>
+                        <td>{{ rentReceipt.total }}</td>
+                        <td>{{ rentReceipt.startRent | date('d/m/y') }}</td>
+                        <td>{{ rentReceipt.endRent | date('d/m/y') }}</td>
+                        <td>{{ rentReceipt.date | date('d/m/y') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center" id="rentReceiptPagination">
+                {{ knp_pagination_render(rentReceipts) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('clickableTable') }}
+{% endblock %}
