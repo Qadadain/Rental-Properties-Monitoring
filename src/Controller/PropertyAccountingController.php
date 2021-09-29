@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 /**
  * @Route("/comptabilite-bien", name="property_accounting_")
  **/
@@ -39,14 +40,16 @@ class PropertyAccountingController extends AbstractController
         return $this->render('add/propertyAccounting.html.twig', [
             'form' => $form->createView(),
         ]);
-    } /**
- * @Route("/{slug}", name="show")
- * @param EntityManagerInterface $em
- * @param Property $property
- * @param Request $request
- * @param DataTableFactory $dataTableFactory
- * @return Response
- */
+    }
+
+    /**
+     * @Route("/{slug}", name="show")
+     * @param EntityManagerInterface $em
+     * @param Property $property
+     * @param Request $request
+     * @param DataTableFactory $dataTableFactory
+     * @return Response
+     */
     public function show(EntityManagerInterface $em, Property $property, Request $request, DataTableFactory $dataTableFactory): Response
     {
         $properties = $em->getRepository('App:PropertyAccounting')->findBy(['property' => $property]);
@@ -56,7 +59,7 @@ class PropertyAccountingController extends AbstractController
             ['date' => 'ASC']
         );
 
-        foreach ($properties as $data){
+        foreach ($properties as $data) {
             $propertyName = $data->getProperty()->getName();
         }
 
@@ -107,6 +110,72 @@ class PropertyAccountingController extends AbstractController
         return $this->render('show/propertyAccounting.html.twig', [
             'datatable' => $datatable,
             'propertyName' => $propertyName,
+        ]);
+    }
+
+    /**
+     * @Route("/show/all", name="show_all")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param DataTableFactory $dataTableFactory
+     * @return Response
+     */
+    public function showAll(EntityManagerInterface $em, Request $request, DataTableFactory $dataTableFactory): Response
+    {
+
+        $propertiesAccounting = $em->getRepository('App:PropertyAccounting')->findAll();
+
+        $results = [];
+        foreach ($propertiesAccounting as $propertyAccounting) {
+            $results[] = [
+                'id' => $propertyAccounting->getId(),
+                'label' => $propertyAccounting->getLabel(),
+                'operationType' => $propertyAccounting->getOperationType(),
+                'value' => ($propertyAccounting->getValue()),
+                'date' => $propertyAccounting->getDate(),
+                'comment' => $propertyAccounting->getComment(),
+                'property' => $propertyAccounting->getProperty()
+            ];
+        }
+
+        $datatable = $dataTableFactory->create()
+            ->add('id', TextColumn::class, [
+                'label' => 'id.'
+            ])
+            ->add('label', TextColumn::class, [
+                'label' => 'label',
+                'orderable' => true
+            ])
+            ->add('operationType', TextColumn::class, [
+                'label' => 'Type d\'opération',
+                'orderable' => true
+            ])
+            ->add('value', TextColumn::class, [
+                'label' => 'Montant',
+                'orderable' => true
+            ])
+            ->add('date', DateTimeColumn::class, [
+                'format' => 'd-m-Y',
+                'label' => 'Date',
+                'orderable' => true
+            ])
+            ->add('comment', TextColumn::class, [
+                'label' => 'Commentaire',
+            ])
+            ->add('property', TextColumn::class, [
+                'label' => 'bien',
+                'orderable' => true
+            ]);
+
+
+        $datatable->createAdapter(ArrayAdapter::class, $results);
+        $datatable->handleRequest($request);
+
+        if ($datatable->isCallback()) {
+            return $datatable->getResponse();
+        }
+        return $this->render('show/allPropertyAccounting.html.twig', [
+            'datatable' => $datatable,
         ]);
     }
 }
