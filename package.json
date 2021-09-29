@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
-        "bootstrap-datepicker": "^1.9.0"
+        "ansi-regex": "^5.0.1",
+        "bootstrap-datepicker": "^1.9.0",
+        "nth-check": "^2.0.1"
     }
 }
