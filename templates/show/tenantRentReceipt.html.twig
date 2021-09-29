@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                 {% for rentReceipt in rentReceipts %}
-                    <tr data-link="" data-target="_BLANK" style="cursor: pointer">
+                    <tr data-link="{{ path('rent_receipt_pdf', {'id': rentReceipt.id}) }}" data-target="_BLANK" style="cursor: pointer">
                         <td>{{ rentReceipt.rent }}</td>
                         <td>{{ rentReceipt.advancesOnCharges }}</td>
                         <td>{{ rentReceipt.total }}</td>
