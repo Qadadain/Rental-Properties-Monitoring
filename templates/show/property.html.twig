@@ -33,17 +33,24 @@
             </div>
         </div>
 
-        <div class="row">
             {% for rentalProperty in rentalProperties %}
-                <div class="col-4 text-center">
-
-                    <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
-                        <div class="">
-                            {{ rentalProperty.name }}
-                        </div>
-                    </a>
+                <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
+                <div class="card col-3">
+                    <table class="cardcontent">
+                        <tr>
+                            <td style="padding: 7px;">
+                                <div class="bluestick" style="background:black;"></div>
+                            </td>
+                            <td>
+                                <strong class="name">{{ rentalProperty.name }}</strong>
+                                <p class="data">
+                                    <span style="color: #666">{{ rentalProperty.rentalPropertyType }}</span><br>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            {% endfor %}
-        </div>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}
