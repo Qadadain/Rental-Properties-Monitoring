@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 /**
      * @Route("/location", name="rental_property_")
@@ -44,12 +46,45 @@ class RentalPropertyController extends AbstractController
     /**
      * @Route("/{slug}", name="show")
      */
-    public function show(RentalProperty $rentalProperty): Response
+    public function show(RentalProperty $rentalProperty, EntityManagerInterface $em, ChartBuilderInterface $chartBuilder): Response
     {
+        $labelRep = $em->getRepository('App:Label');
+        $rentalPropertiesAccounting = $em->getRepository('App:RentalPropertyAccounting');
+
+        $labels = $labelRep->findAll();
+        $rentalPropertyId = $rentalProperty->getId();
+
+        $labelNames = [];
+        $labelColors = [];
+        $rentalPropertySumByLabel = [];
+
+        foreach ($labels as $label) {
+            $labelId = $label->getId();
+            $labelColors[] = $label->getColor();
+            $labelNames[] = $label->getName();
+            $rentalPropertySumByLabel[] = $rentalPropertiesAccounting->getRentalPropertySum($labelId, $rentalPropertyId);
+        }
+
+        $rentalPropertySumByLabel =  call_user_func_array('array_merge',$rentalPropertySumByLabel);
+        $rentalPropertySumByLabel =  call_user_func_array('array_merge',$rentalPropertySumByLabel);
+
+        $rentalPropertyAccountingChart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $rentalPropertyAccountingChart->setData([
+            'labels' => $labelNames,
+            'datasets' => [
+                [
+                    'label' => 'My First dataset',
+                    'backgroundColor' => $labelColors,
+                    'borderColor' => '#343a40',
+                    'data' => $rentalPropertySumByLabel,
+                ],
+            ],
+        ]);
 
 
         return $this->render('show/rentalProperty.html.twig', [
             'rentalProperty' => $rentalProperty,
+            'rentalPropertyAccountingChart' => $rentalPropertyAccountingChart,
         ]);
     }
 
