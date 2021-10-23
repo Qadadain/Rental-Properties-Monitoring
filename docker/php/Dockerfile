@@ -43,7 +43,7 @@ RUN apt-get update \
 COPY ./ /var/www/html/
 
 COPY ./docker/script/install.sh /install.sh
-RUN chmod +x /init.sh
+RUN chmod +x /install.sh
 RUN sh /install.sh
 
 # Copy files
