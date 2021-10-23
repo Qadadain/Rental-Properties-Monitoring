@@ -42,10 +42,12 @@ RUN apt-get update \
 
 COPY ./ /var/www/html/
 
+WORKDIR /var/www/html/
 COPY ./docker/script/install.sh ./var/www/html/install.sh
-RUN chmod +x ./var/www/html//install.sh
-RUN sh ./var/www/html/install.sh
+RUN chmod +x install.sh
+RUN sh /install.sh
 
+WORKDIR /
 # Copy files
 COPY ./docker/local.ini /usr/local/etc/php/conf.d/local.ini
 
