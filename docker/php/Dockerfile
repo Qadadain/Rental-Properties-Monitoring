@@ -42,25 +42,6 @@ RUN apt-get update \
 
 COPY ./ /var/www/html/
 
-WORKDIR /var/www/html/
-COPY ./docker/script/install.sh ./var/www/html/install.sh
-RUN chmod +x install.sh
-RUN sh /install.sh
+WORKDIR /var/www/html
 
-WORKDIR /
-# Copy files
-COPY ./docker/local.ini /usr/local/etc/php/conf.d/local.ini
-
-COPY ./docker/conf.d/nginx.conf /etc/nginx/nginx.conf
-
-COPY ./docker/script/init.sh /init.sh
-RUN chmod +x /init.sh
-ENTRYPOINT ["/init.sh"]
-
-EXPOSE 8080
-RUN nginx -t
-
-COPY ./docker/script/post_deploy.sh /post_deploy.sh
-RUN ["chmod", "+x", "post_deploy.sh"]
-
-CMD [ "sh", "./post_deploy.sh" ]
+RUN pwd
