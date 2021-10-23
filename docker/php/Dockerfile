@@ -38,9 +38,9 @@ RUN apt-get update \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && apt-get install yarn \
-    && apt-get install --no-install-recommends yarn \
+    && apt-get install --no-install-recommends yarn
 
-RUN apt update && apt install --no-install-recommends --assume-yes xfonts-75dpi fontconfig libjpeg62-turbo-dev libx11-6 libxcb1 libxext6 libxrender1 xfonts-base libpng-dev libjpeg-dev wget \
+RUN apt-get update && apt-get install --no-install-recommends --assume-yes xfonts-75dpi fontconfig libjpeg62-turbo-dev libx11-6 libxcb1 libxext6 libxrender1 xfonts-base libpng-dev libjpeg-dev wget \
  && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb \
  && dpkg --install wkhtmltox_0.12.5-1.stretch_amd64.deb
 
