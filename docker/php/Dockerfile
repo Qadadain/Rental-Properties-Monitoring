@@ -47,4 +47,4 @@ WORKDIR /var/www/html
 RUN pwd
 RUN cp .env .env.local && ls -a && cat .env.local
 
-RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/RPM?serverVersion=5.7"' > ./.env.local && cat ./.env.local
+RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/RPM?serverVersion=5.7"' >> .env.local && cat .env.local
