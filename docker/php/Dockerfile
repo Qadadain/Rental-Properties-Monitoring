@@ -42,19 +42,9 @@ RUN apt-get update \
 
 COPY ./ /var/www/html/
 
-WORKDIR /var/www/html
-
-RUN cp ./.env ./.env.local
-
-RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/RPM?serverVersion=5.7"' > ./.env.local
-
-RUN composer install
-
-RUN yarn install
-
-RUN yarn encore dev
-
-WORKDIR /
+COPY ./docker/script/install.sh /install.sh
+RUN chmod +x /init.sh
+RUN sh /install.sh
 
 # Copy files
 COPY ./docker/local.ini /usr/local/etc/php/conf.d/local.ini
