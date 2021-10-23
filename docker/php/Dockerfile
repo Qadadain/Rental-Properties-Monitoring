@@ -45,3 +45,5 @@ COPY ./ /var/www/html/
 WORKDIR /var/www/html
 
 RUN pwd
+RUN cp ./.env ./.env.local && ls -a
+
