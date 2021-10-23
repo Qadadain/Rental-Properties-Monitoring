@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'rootroot'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_HOST: '%'
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    ports:
+      - "85:8080"
+    depends_on:
+      - db
+
+  node:
+    image: node:12-alpine
+    command: sh -c "yarn install && yarn encore dev --watch"
+    volumes:
+      - .:/app:cached
+    working_dir: /app
