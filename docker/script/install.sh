@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-
+pwd
 cp .env .env.local
 RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/RPM?serverVersion=5.7"' > /var/www/html/.env.local
 composer install
