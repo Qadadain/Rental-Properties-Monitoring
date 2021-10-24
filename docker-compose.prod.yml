@@ -23,7 +23,7 @@ services:
       dockerfile: ./docker/php/Dockerfile
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.my-app.rule=Host(`emptydev.fr`)'
+      - 'traefik.http.routers.my-app.rule=Host(`prod.emptydev.fr`)'
       - 'traefik.http.routers.my-app.tls=true'
       - 'traefik.http.routers.my-app.tls.certresolver=lets-encrypt'
     ports:
