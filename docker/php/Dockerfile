@@ -69,6 +69,7 @@ COPY ./docker/conf.d/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/script/init.sh /init.sh
 RUN chmod +x /init.sh
 ENTRYPOINT ["/init.sh"]
+RUN chmod 600 /var/www/html/traefik/acme.json
 
 EXPOSE 8080
 RUN nginx -t
