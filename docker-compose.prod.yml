@@ -3,6 +3,12 @@ services:
   traefik:
     image: traefik:2.1
     restart: always
+    labels:
+      - 'traefik.http.middlewares.https_redirect.redirectscheme.scheme=https'
+      - 'traefik.http.middlewares.https_redirect.redirectscheme.permanent=true'
+      - 'traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)'
+      - 'traefik.http.routers.http_catchall.entrypoints=http'
+      - 'traefik.http.routers.http_catchall.middlewares=https_redirect'
     ports:
       - '80:85'
       - '443:443'

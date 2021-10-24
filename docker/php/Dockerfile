@@ -44,6 +44,7 @@ RUN apt-get update && apt-get install --no-install-recommends --assume-yes xfont
  && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb \
  && dpkg --install wkhtmltox_0.12.5-1.stretch_amd64.deb
 
+RUN apt-get install -y default-mysql-client
 
 COPY ./ /var/www/html/
 
