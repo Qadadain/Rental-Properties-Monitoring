@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-sleep 20
+
+while ! mysqladmin ping -hdb --silent; do
+    sleep 1
+done
 
 php /var/www/html/bin/console doctrine:database:create
 php /var/www/html/bin/console doctrine:migrations:migrate -n

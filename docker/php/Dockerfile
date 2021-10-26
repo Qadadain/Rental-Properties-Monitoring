@@ -44,6 +44,7 @@ RUN apt-get update && apt-get install --no-install-recommends --assume-yes xfont
  && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb \
  && dpkg --install wkhtmltox_0.12.5-1.stretch_amd64.deb
 
+RUN apt-get install -y default-mysql-client
 
 COPY ./ /var/www/html/
 
@@ -69,6 +70,7 @@ COPY ./docker/conf.d/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/script/init.sh /init.sh
 RUN chmod +x /init.sh
 ENTRYPOINT ["/init.sh"]
+RUN chmod 600 /var/www/html/traefik/acme.json
 
 EXPOSE 8080
 RUN nginx -t

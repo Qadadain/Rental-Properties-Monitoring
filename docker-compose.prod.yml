@@ -1,5 +1,14 @@
 version: '3.8'
 services:
+  traefik:
+    image: traefik:2.1
+    restart: always
+    ports:
+      - '80:85'
+      - '443:443'
+    volumes:
+      - ./traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   db:
     image: mysql:8.0
     restart: always
@@ -12,6 +21,13 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./traefik:/var/www/html/traefik
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.my-app.rule=Host(`prod.emptydev.fr`)'
+      - 'traefik.http.routers.my-app.tls=true'
+      - 'traefik.http.routers.my-app.tls.certresolver=lets-encrypt'
     ports:
       - "85:8080"
     depends_on:
