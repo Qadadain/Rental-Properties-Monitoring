@@ -9,7 +9,7 @@
 
 [entryPoints]
   [entryPoints.http]
-    address = ":80"
+    address = ":85"
   [entryPoints.https]
     address = ":443"
 
