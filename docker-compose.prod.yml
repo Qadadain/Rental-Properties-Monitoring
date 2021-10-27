@@ -4,7 +4,7 @@ services:
     image: traefik:2.1
     restart: always
     ports:
-      - '80:85'
+      - '80:80'
       - '443:443'
     volumes:
       - ./traefik:/etc/traefik
@@ -31,7 +31,7 @@ services:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
     ports:
-      - "85:8080"
+      - "80:8080"
     depends_on:
       - db
 
