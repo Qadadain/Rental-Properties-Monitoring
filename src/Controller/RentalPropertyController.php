@@ -19,6 +19,17 @@ use Symfony\UX\Chartjs\Model\Chart;
      */
 class RentalPropertyController extends AbstractController
 {
+    /**
+     * @Route ("/", name="index")
+     */
+    public function index(EntityManagerInterface $em): Response
+    {
+        $rentalProperties = $em->getRepository('App:RentalProperty');
+
+        return $this->render('index/rentalProperty.html.twig', [
+            'rentalProperties' => $rentalProperties->findAll()
+        ]);
+    }
 
     /**
      * @Route ("/add", name="add")
