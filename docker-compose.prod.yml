@@ -9,13 +9,6 @@ services:
     volumes:
       - ./traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 'rootroot'
-      MYSQL_PASSWORD: 'root'
-      MYSQL_ROOT_HOST: '%'
 
   web:
     build:
