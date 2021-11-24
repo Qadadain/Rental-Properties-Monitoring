@@ -10,19 +10,19 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       MAILER_DSN: ${{ secrets.MAILER_DSN }}
       MAILER_FROM_ADDRESS: ${{ secrets.MAILER_FROM_ADDRESS }}
-          
+
     strategy:
       fail-fast: true
       matrix:
         php-versions: ['7.4']
-        
 
-        
+
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,15 +36,6 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
         env:
           update: true
-          
-      - name : Composer Install
-        run: composer install
-      
-      - name : Yarn Install
-        run: yarn install
-        
-      - name : Yarn encore prod
-        run: yarn encore dev
-        
+
       - name : Docker build
         run: docker-compose -f docker-compose.prod.yml up -d --buid
