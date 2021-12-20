@@ -11,5 +11,6 @@ import '../styles/global.scss';
 // start the Stimulus application
 import '../bootstrap';
 
+
 // app.js
 require('bootstrap');
