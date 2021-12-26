@@ -69,12 +69,18 @@
                                  class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="add-content" tabindex="-1">
                                 <div class="py-1" role="none">
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                       tabindex="-1" id="menu-item-0">Account settings</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                       tabindex="-1" id="menu-item-1">Support</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                       tabindex="-1" id="menu-item-2">License</a>
+                                    <a href="{{ path('tenant_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-0">Locataire</a>
+                                    <a href="{{ path('property_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-1">Bien</a>
+                                    <a href="{{ path('rental_property_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-2">Location</a>
+                                    <a href="{{ path('property_accounting_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-2">Ligne bien</a>
+                                    <a href="{{ path('rental_property_accounting_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-2">Ligne location</a>
+                                    <a href="{{ path('rent_receipt_add') }}" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                       tabindex="-1" id="menu-item-2">Justificatif</a>
                                 </div>
                             </div>
                         </div>
