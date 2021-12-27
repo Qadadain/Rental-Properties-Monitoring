@@ -1,0 +1,22 @@
+#dt > thead {
+    @apply bg-gray-800 text-white
+}
+
+#dt > thead > tr {
+    @apply text-gray-300
+}
+
+#dt > tbody > tr.odd, #dt > tbody > tr.even {
+    border: solid 4px #edf2f7 !important;
+    border-collapse: revert !important;
+    text-align: center;
+}
+
+table.dataTable {
+    border-collapse: collapse !important;
+}
+
+#dt_length > label > select, #dt_filter > label > input[type=search] {
+    margin-bottom: 10px;
+}
+

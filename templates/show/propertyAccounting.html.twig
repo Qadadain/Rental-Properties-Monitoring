@@ -3,13 +3,13 @@
 {% block title %}Hello LocationAccountingController!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row d-flex justify-content-center">
+    <div class="container mx-auto">
+        <div class="flex justify-center">
             <h1>Ligne comptabilité - {{ propertyName }} </h1>
         </div>
     </div>
-    <div class="container mt-5">
-        <div id="propertyAccounting">Loading...</div>
+    <div class="container mx-auto mt-5">
+        <div id="propertyAccounting" class="overflow-auto" >Loading...</div>
     </div>
 {% endblock %}
 {% block javascripts %}
