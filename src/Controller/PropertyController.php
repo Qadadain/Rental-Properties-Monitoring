@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\Property;
@@ -30,6 +31,31 @@ class PropertyController extends AbstractController
 
         return $this->render('index/property.html.twig', [
             'properties' => $properties->findAll(),
+        ]);
+    }
+    /**
+     * @Route ("/add", name="add")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param SluggerInterface $slugger
+     * @return RedirectResponse|Response
+     *
+     *
+     */
+
+    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
+    {
+        $property = new Property();
+        $form = $this->createForm(PropertyType::class, $property);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $property->setSlug($slugger->slug(strtolower(strtolower($property->getName()))));
+            $em->persist($property);
+            $em->flush();
+            return $this->redirectToRoute('home_index');
+        }
+        return $this->render('add/property.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
@@ -81,30 +107,5 @@ class PropertyController extends AbstractController
             'propertyAccountingChart' => $propertyAccountingChart,
         ]);
     }
-
-
-    /**
-     * @Route ("/add", name="add")
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @param SluggerInterface $slugger
-     * @return RedirectResponse|Response
-     */
-    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
-    {
-        $property = new Property();
-        $form = $this->createForm(PropertyType::class, $property);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $property->setSlug($slugger->slug(strtolower(strtolower($property->getName()))));
-            $em->persist($property);
-            $em->flush();
-            return $this->redirectToRoute('home_index');
-        }
-        return $this->render('add/property.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
 
 }
