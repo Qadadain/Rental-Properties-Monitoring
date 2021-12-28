@@ -1,10 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import 'Components/navbar';
 @import 'Components/card';
+@import 'Components/form';
 @import 'Components/paginator';
-@import 'Components/table';
+@import 'Components/tables';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 i {

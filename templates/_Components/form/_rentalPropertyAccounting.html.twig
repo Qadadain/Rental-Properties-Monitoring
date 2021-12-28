@@ -1,28 +1,24 @@
 {{ form_start(form) }}
-<div class="container">
-    <div class="col-6 offset-3">
 
         {{ form_label(form.value) }}
-        {{ form_widget(form.value) }}
+        {{ form_widget(form.value, {'attr': {'class': 'form-input'}}) }}
 
         {{ form_label(form.date) }}
-        {{ form_widget(form.date) }}
+        {{ form_widget(form.date, {'attr': {'class': 'form-input'}}) }}
 
         {{ form_label(form.comment) }}
-        {{ form_widget(form.comment) }}
+        {{ form_widget(form.comment, {'attr': {'class': 'form-input'}}) }}
 
         {{ form_label(form.operationType) }}
-        {{ form_widget(form.operationType) }}
+        {{ form_widget(form.operationType, {'attr': {'class': 'form-input'}}) }}
 
         {{ form_label(form.label) }}
-        {{ form_widget(form.label) }}
+        {{ form_widget(form.label, {'attr': {'class': 'form-input'}}) }}
 
         {{ form_label(form.rentalProperty) }}
-        {{ form_widget(form.rentalProperty) }}
+        {{ form_widget(form.rentalProperty, {'attr': {'class': 'form-input'}}) }}
 
-        <div class="col-12 d-flex justify-content-center mt-5">
-            <button type="submit" class="btn btn-outline-info">Ajouter</button>
-        </div>
-    </div>
+<div class="flex justify-center mt-10">
+        <button type="submit" class="form-submit">Ajouter</button>
 </div>
 {{ form_end(form) }}
