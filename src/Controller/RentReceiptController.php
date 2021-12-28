@@ -39,9 +39,8 @@ class RentReceiptController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/{locataireFirstName}-{locataireLastName}-{id}", name="show")
+     * @Route("/pdf/pdf/{locataireFirstName}-{locataireLastName}-{id}", name="show")
      */
     public function getRentReceiptByTenant(Tenant $tenant, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
@@ -57,6 +56,22 @@ class RentReceiptController extends AbstractController
         return $this->render('show/tenantRentReceipt.html.twig', [
             'tenant' => $tenant,
             'rentReceipts' => $rentReceipts,
+        ]);
+    }
+
+    /**
+     * @Route("/lol/lol/{id}", name="test")
+     */
+    public function test(RentReceiptRepository $rentReceiptRepository, int $id): Response
+    {
+        $rentReceipts = $rentReceiptRepository->findAll();
+        $rentReceipt = $rentReceiptRepository->findOneBy(['id' => $id]);
+
+
+        return $this->render('/_Components/pdfView.html.twig', [
+            'user' => $this->getUser(),
+            'rentReceipts' => $rentReceipts,
+            'rentReceipt' => $rentReceipt,
         ]);
     }
 

@@ -227,7 +227,6 @@
                         ...................
                     </td>
                 </tr>
-                </tr>
                 </td>
             </table>
             <tr class="total">
@@ -236,131 +235,81 @@
     </table>
 </div>
 
-<div class="invoice-box">
-    <table cellpadding="0" cellspacing="0">
-        <tr class="top_rw">
-            <td colspan="2">
-                <h2 style="margin-bottom: 0px;">Quittance de loyer</h2>
-                <span style="">Période du {{ rentReceipt.startRent | date('m/y') }} au {{ rentReceipt.endRent | date('d/m/y') }} - Date d'émission : {{ rentReceipt.date | date('d/m/y') }}</p></span>
-            </td>
-            <td style="width:30%; margin-right: 10px;">
-                N° Locataire : {{ rentReceipt.rentalNumber }}
-            </td>
-        </tr>
-        <tr class="top">
-            <td colspan="3">
-                <table>
-                    <tr>
-                        <td style="text-align: inherit">
-                            <b>Bailleur</b><br>
-                            {{ user.lessorInformation |raw }}
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr class="information">
-            <td colspan="3">
-                <table>
-                    <tr>
-                        <td style="text-align: end">
-                            <b>Locataire</b><br>
-                            {{ rentReceipt.tenant }}
-                            <br>
-                            {{ rentReceipt.tenant.rentalProperty.property.address }}
-                            <br>
-                            {{ rentReceipt.tenant.rentalProperty.property.city }}
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <td colspan="3">
-            <table cellspacing="0px" cellpadding="2px">
-                <tr class="heading">
-                    <td style="width:25%;">
-                        Rubrique
-                    </td>
-                    <td style="width:10%; text-align:center;">
-                    </td>
-                    <td style="width:10%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                        Montant
-                    </td>
-                </tr>
-                <tr class="item">
-                    <td style="width:25%;">
-                        Loyer habitation
-                    </td>
-                    <td style="width:10%; text-align:center;">
-                    </td>
-                    <td style="width:10%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                        {{ rentReceipt.rent | format_currency('EUR', locale='fr')}}
-                    </td>
-                </tr>
-                <tr class="item">
-                    <td style="width:25%;">
-                        Avances sur charge
-                    </td>
-                    <td style="width:10%; text-align:center;">
-                    </td>
-                    <td style="width:10%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                        {{ rentReceipt.advancesOnCharges | format_currency('EUR', locale='fr')}}
-                    </td>
-                </tr>
-                <tr class="item">
-                    <td style="width:25%; padding-top: 15px;">
-                        .................................................
-                    </td>
-                    <td style="width:10%; text-align:center;">
-                    </td>
-                    <td style="width:10%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                        ...................
-                    </td>
-                </tr>
-                <tr class="item">
-                    <td style="width:25%; padding-top: 15px;">
-                        .................................................
-                    </td>
-                    <td style="width:10%; text-align:center;">
-                    </td>
-                    <td style="width:10%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                    </td>
-                    <td style="width:15%; text-align:right;">
-                        ...................
-                    </td>
-                </tr>
-                </td>
-            </table>
-            <tr class="total">
-                <td colspan="3" align="right"> Montant total : <b>{{ rentReceipt.total | format_currency('EUR', locale='fr')}}</b></td>
-            </tr>
-    </table>
+
+
+
+<div style="margin: 2rem;"></div>
+
+<div style="width: 100%; border: darkgreen 1px solid">
+    <div style="display: -webkit-box">
+        <div style="width: 25%; border: darkgreen 1px solid; margin: 1rem">
+            <p style="text-align: center; color: darkgreen">Bailleur</p>
+            <div style="margin: 1rem">
+                {#
+                {{ user.lessorInformation |raw }}
+                #}
+            </div>
+        </div>
+        <div class="center" style="width: 45%; margin: 1rem; text-align: center">
+            <p>Avis de loyer</p>
+            <p>Sans valeur de quittance</p>
+            <p>Loyer du : {{ rentReceipt.startRent | date('m/y')}} </p>
+            <p>Au : {{ rentReceipt.endRent | date('d/m/y')}}</p>
+            <p>
+                A réception de votre réglement, nous ne manquerons pas de vous adresser la QUITTANCE correspondante
+            </p>
+        </div>
+        <div style="width: 18%; border: darkgreen 1px solid; margin: 1rem">
+            <p style="text-align: center; color: darkgreen">Bailleur</p>
+            <div style="margin: 1rem">
+                <p>N. de locat : {{ rentReceipt.rentalNumber }}</p>
+                <p>Date : {{ rentReceipt.date | date('d/m/y') }}</p>
+                <p>Montant : {{ rentReceipt.total | format_currency('EUR', locale='fr')}}</p>
+            </div>
+        </div>
+    </div>
+    <div style="display: -webkit-box;">
+        <div style="width: 40%; border: darkgreen 1px solid; margin: 1rem">
+            <P style="text-align: center;  border-bottom: darkgreen 1px solid; margin: 0 !important;">DETAIL DE L'AVIS DE LOYER</P>
+            <div style="display: -webkit-box;  margin: 1rem;">
+                <div style="width: 60%;">
+                    <p>Loyer :</p>
+                    <p>Avances sur charges :</p>
+                    <p>.....................</p>
+                    <p>.....................</p>
+                    <p>.....................</p>
+                    <p>.....................</p>
+                    <p>Total :</p>
+                </div>
+                <div style="width: 30%">
+                    <p style="text-align: center">{{ rentReceipt.rent | format_currency('EUR', locale='fr')}}</p>
+                    <p style="text-align: center">{{ rentReceipt.advancesOnCharges | format_currency('EUR', locale='fr')}}</p>
+                    <p style="text-align: center">........</p>
+                    <p style="text-align: center">........</p>
+                    <p style="text-align: center">........</p>
+                    <p style="text-align: center">........</p>
+                    <p style="text-align: center; margin-bottom: 1rem;">{{ rentReceipt.total | format_currency('EUR', locale='fr')}}</p>
+                </div>
+            </div>
+        </div>
+        <div style="width: 10%;  margin: 1rem;">
+            <div style="font-size: 10px">
+                <p>Code monnaie ISO</p>
+                <p>EUR</p>
+            </div>
+        </div>
+        <div style="width: 40%; border: darkgreen 1px solid; margin: 1rem">
+            <div style="margin: 1rem;">
+                <p>Locataire</p>
+                <p>{{ rentReceipt.tenant }}</p>
+            </div>
+            <div style="margin: 1rem;">
+                <p>IMMEUBLE SIS A</p>
+                <p>{{ rentReceipt.tenant.rentalProperty.property.name }}</p>
+                <p>{{ rentReceipt.tenant.rentalProperty.property.address }} - {{ rentReceipt.tenant.rentalProperty.property.city }}</p>
+                <p>{{ rentReceipt.tenant.rentalProperty.property.address }}</p>
+            </div>
+        </div>
+    </div>
 </div>
+
