@@ -1,9 +1,4 @@
 #rentReceiptPagination {
-    span {
-        padding: 0.5rem 1rem;
-        border: 1px black solid;
-    }
-
     span:nth-child(1) {
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
@@ -15,18 +10,14 @@
     }
 
     span.current {
-        background-color: black;
-        color: white;
+
+        @apply mx-1 px-3 py-2 bg-gray-700 text-gray-200 rounded-lg;
+
     }
+
     span {
-        a{
-            color: black;
-        }
-    }
-    span:hover {
-        background-color: black;
-        a{
-        color: white;
+        a {
+            @apply mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg;
         }
     }
 }

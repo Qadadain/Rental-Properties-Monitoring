@@ -2,33 +2,33 @@
 
 
 {% block body %}
-    <div class="row d-flex justify-content-center">
-        <div class="my-4 text-center">
-            <i class="fa fa-5x mb-2 fa-file-pdf pdf-color"></i>
-            {% if rentReceipts is empty %}
-                <h3>Pas de Quittance de loyer pour {{ tenant.firstName }} {{ tenant.lastName }}</h3>
-                <div class="d-flex justify-content-center">
-                    <a href="{{ path('rent_receipt_add') }}">Ajouter une Quittance loyer</a>
-                </div>
-            {% else %}
-                <h1>Quitances de Loyer de {{ tenant.firstName }} {{ tenant.lastName }}</h1>
+    <div class="my-4 text-center">
+    <i class="fa fa-4x mb-2 fa-file-pdf pdf-color"></i>
+    {% if rentReceipts is empty %}
+        <h3>Pas de Quittance de loyer pour {{ tenant.firstName }} {{ tenant.lastName }}</h3>
+        <div class="d-flex justify-content-center">
+            <a href="{{ path('rent_receipt_add') }}">Ajouter une Quittance loyer</a>
         </div>
-    </div>
-        <div class="container wrapper">
-            <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+    {% else %}
+        <h1 class="text-center m-5 font-bold text-2xl lg:text-4xl">Quitances de Loyer
+            de {{ tenant.firstName }} {{ tenant.lastName }}</h1>
+        </div>
+        <div class="container mx-auto overflow-x-scroll lg:overflow-hidden w-4/5">
+            <table class="text-center" id="rentReceipt" width="100%">
                 <thead>
                 <tr>
-                    <th class="col-md-2">Loyer</th>
-                    <th class="col-md-2">Avances</th>
-                    <th class="col-md-2">total</th>
-                    <th class="col-md-2">Du</th>
-                    <th class="col-md-2">Au</th>
-                    <th class="col-md-2">Date</th>
+                    <th class="">Loyer</th>
+                    <th class="">Avances</th>
+                    <th class="">total</th>
+                    <th class="">Du</th>
+                    <th class="">Au</th>
+                    <th class="">Date</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for rentReceipt in rentReceipts %}
-                    <tr data-link="{{ path('rent_receipt_pdf', {'id': rentReceipt.id}) }}" data-target="_BLANK" style="cursor: pointer">
+                    <tr data-link="{{ path('rent_receipt_pdf', {'id': rentReceipt.id}) }}" data-target="_BLANK"
+                        style="cursor: pointer">
                         <td>{{ rentReceipt.rent }}</td>
                         <td>{{ rentReceipt.advancesOnCharges }}</td>
                         <td>{{ rentReceipt.total }}</td>
@@ -39,7 +39,9 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center" id="rentReceiptPagination">
+        </div>
+        <div class="container mx-auto mt-10">
+            <div class="flex justify-center" id="rentReceiptPagination">
                 {{ knp_pagination_render(rentReceipts) }}
             </div>
         </div>

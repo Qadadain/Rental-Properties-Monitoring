@@ -1,4 +1,4 @@
-#dt > thead {
+#dt > thead , #rentReceipt > thead {
     @apply bg-gray-800 text-white
 }
 
@@ -6,7 +6,7 @@
     @apply text-gray-300
 }
 
-#dt > tbody > tr.odd, #dt > tbody > tr.even {
+#dt > tbody > tr.odd, #dt > tbody > tr.even ,  #rentReceipt > tbody > tr {
     border: solid 4px #edf2f7 !important;
     border-collapse: revert !important;
     text-align: center;
