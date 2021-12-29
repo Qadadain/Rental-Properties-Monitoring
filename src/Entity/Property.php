@@ -54,6 +54,11 @@ class Property
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $zipCode;
+
     public function __construct()
     {
         $this->rentalProperty = new ArrayCollection();
@@ -186,6 +191,18 @@ class Property
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getZipCode(): ?int
+    {
+        return $this->zipCode;
+    }
+
+    public function setZipCode(int $zipCode): self
+    {
+        $this->zipCode = $zipCode;
 
         return $this;
     }

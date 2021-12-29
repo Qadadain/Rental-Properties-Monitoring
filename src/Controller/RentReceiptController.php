@@ -60,22 +60,6 @@ class RentReceiptController extends AbstractController
     }
 
     /**
-     * @Route("/lol/lol/{id}", name="test")
-     */
-    public function test(RentReceiptRepository $rentReceiptRepository, int $id): Response
-    {
-        $rentReceipts = $rentReceiptRepository->findAll();
-        $rentReceipt = $rentReceiptRepository->findOneBy(['id' => $id]);
-
-
-        return $this->render('/_Components/pdfView.html.twig', [
-            'user' => $this->getUser(),
-            'rentReceipts' => $rentReceipts,
-            'rentReceipt' => $rentReceipt,
-        ]);
-    }
-
-    /**
      * @Route("/pdf/pdf-{id}", name="pdf")
      * @throws Exception
      */
@@ -100,6 +84,4 @@ class RentReceiptController extends AbstractController
             "loyer-$tenant-$date.pdf"
         );
     }
-
-
 }
