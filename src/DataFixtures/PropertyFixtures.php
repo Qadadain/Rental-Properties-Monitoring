@@ -20,18 +20,21 @@ class PropertyFixtures extends Fixture
         [
             'name' => 'Localisation ABC',
             'city' => 'Bordeaux',
+            'zipCode' => '33000',
             'address' => 'rue paul dénucé',
             'comment' => 'immeuble avec des appartements',
         ],
         [
             'name' => 'Localisation I II III',
             'city' => 'Bayona',
+            'zipCode' => '64000',
             'address' => 'rue du piment',
             'comment' => 'immeuble avec des appartements',
         ],
         [
             'name' => 'Localisation 1 2 3',
             'city' => 'Paris',
+            'zipCode' => '75000',
             'address' => 'boulevard de la libération',
             'comment' => 'immeuble avec des appartements',
         ],
@@ -43,6 +46,7 @@ class PropertyFixtures extends Fixture
             $property = new Property();
             $property->setName($data['name'])
                 ->setCity($data['city'])
+                ->setZipCode($data['zipCode'])
                 ->setAddress($data['address'])
                 ->setComment($data['comment'])
                 ->setSlug($this->slugger->slug(strtolower($property->getName())));
