@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/tenant", name="tenant_")
+ * @Route("/locataire", name="tenant_")
  */
 class TenantController extends AbstractController
 {
