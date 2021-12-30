@@ -62,6 +62,8 @@ class RentalPropertyController extends AbstractController
         $labelRep = $em->getRepository('App:Label');
         $rentalPropertiesAccounting = $em->getRepository('App:RentalPropertyAccounting');
 
+        $tenants = $rentalProperty->getTenants();
+
         $labels = $labelRep->findAll();
         $rentalPropertyId = $rentalProperty->getId();
 
@@ -73,8 +75,12 @@ class RentalPropertyController extends AbstractController
             $labelId = $label->getId();
             $labelColors[] = $label->getColor();
             $labelNames[] = $label->getName();
-            $rentalPropertySumByLabel[] = $rentalPropertiesAccounting->getRentalPropertySum($labelId, $rentalPropertyId);
+            $rentalPropertySumByLabel[] = $rentalPropertiesAccounting->getRentalPropertySumByLabel($labelId, $rentalPropertyId);
         }
+
+        $rentalPropertySum = $rentalPropertiesAccounting->getRentalPropertySum($rentalPropertyId);
+        $rentalPropertySum = call_user_func_array('array_merge',$rentalPropertySum);
+        $rentalPropertySum = round($rentalPropertySum[0], 2);
 
         $rentalPropertySumByLabel =  call_user_func_array('array_merge',$rentalPropertySumByLabel);
         $rentalPropertySumByLabel =  call_user_func_array('array_merge',$rentalPropertySumByLabel);
@@ -95,6 +101,8 @@ class RentalPropertyController extends AbstractController
 
         return $this->render('show/rentalProperty.html.twig', [
             'rentalProperty' => $rentalProperty,
+            'tenants' => $tenants,
+            'rentalPropertySum' => $rentalPropertySum,
             'rentalPropertyAccountingChart' => $rentalPropertyAccountingChart,
         ]);
     }

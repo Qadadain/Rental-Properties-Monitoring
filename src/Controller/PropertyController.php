@@ -81,9 +81,11 @@ class PropertyController extends AbstractController
             $labelId = $label->getId();
             $labelColors[] = $label->getColor();
             $labelNames[] = $label->getName();
-            $propertySumByLabel[] = $propertyAccounting->getPropertySum($labelId, $propertyId);
+            $propertySumByLabel[] = $propertyAccounting->getPropertySumByLabel($labelId, $propertyId);
         }
-
+        $propertySum = $propertyAccounting->getPropertySum($propertyId);
+        $propertySum = call_user_func_array('array_merge',$propertySum);
+        $propertySum = round($propertySum[0], 2);
 
         $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
         $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
@@ -104,6 +106,7 @@ class PropertyController extends AbstractController
         return $this->render('show/property.html.twig', [
             'property' => $property,
             'rentalProperties' => $rentalProperties,
+            'propertySum' => $propertySum,
             'propertyAccountingChart' => $propertyAccountingChart,
         ]);
     }
