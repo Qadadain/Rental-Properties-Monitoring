@@ -27,4 +27,11 @@ class TenantRepository extends ServiceEntityRepository
         $tenantName = str_replace($search, $replace, $tenantName);
         return $tenantName;
     }
+
+    public function getTenantOrderByDate() {
+        return $this->createQueryBuilder('t')
+            ->addOrderBy('t.leaveAccommodation','ASC')
+            ->addOrderBy('t.entry',' ASC')
+            ->getQuery()->getResult();
+    }
 }
