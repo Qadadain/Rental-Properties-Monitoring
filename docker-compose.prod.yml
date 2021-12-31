@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  traefik:
+    image: traefik:2.1
+    restart: always
+    ports:
+      - '80:85'
+      - '443:443'
+    volumes:
+      - ./traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./traefik:/var/www/html/traefik
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.my-app.rule=Host(`sci-mg-lietin.adadain.com`)'
+      - 'traefik.http.routers.my-app.tls=true'
+      - 'traefik.http.routers.my-app.tls.certresolver=lets-encrypt'
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "--certificatesresolvers.myhttpchallenge.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "85:8080"
+    depends_on:
+      - db
+
+  node:
+    image: node:12-alpine
+    command: sh -c "yarn install && yarn encore dev --watch"
+    volumes:
+      - .:/app:cached
+    working_dir: /app

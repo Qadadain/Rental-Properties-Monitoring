@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="mt-3 text-center mt-10 font-bold text-4xl">
+    <h1>{{ property.name }} - {{ property.city }}</h1>
+</div>
+
+<div class="container mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 m-10">
+        <div class="border border-solid border-slate-300 rounded-lg">
+            <div class="flex justify-center bg-slate-300 rounded-t-md">
+                <i class="fab fa-3x fa-leanpub leanpub-color"></i>
+            </div>
+            <div>
+                <h2 class="h4 text-center m-4">
+                    Compta biens
+                </h2>
+                {{ render_chart(propertyAccountingChart) }}
+            </div>
+            <div class="text-center m-4">
+                <p class="text-md font-regular text-gray-500">{{ propertySum }}</p>
+                <a href="{{ path('property_accounting_show', {'slug': property.slug}) }}" class="link">
+                    <i class="fas fa-lg fa-list-ul"></i>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {% for rentalProperty in rentalProperties %}
+                <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
+                    <div class="bg-white h-auto tracking-wide border border-black-800 mx-1 rounded-lg relative">
+                        <div class="small-banner w-1 h-20 absolute rounded-tl-md bg-violet-500"></div>
+                        <h5 class="text-2xl font-semibold pl-6 pt-6 pr-6 pb-2">
+                            {{ rentalProperty.name }}</h5>
+                        <div class="px-6 py-3">
+                            <p class="text-md font-regular text-gray-500">{{ rentalProperty.rentalPropertyType}}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

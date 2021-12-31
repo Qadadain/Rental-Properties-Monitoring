@@ -1,17 +1,26 @@
-const $ = require("jquery");
-const $button  = document.querySelector('#sidebar-toggle');
-const $wrapper = document.querySelector('#wrapper');
-
-$button.addEventListener('click', (e) => {
-    e.preventDefault();
-    $wrapper.classList.toggle('toggled');
+$("#burger-button").click(function() {
+    $("#burger-menu").toggle();
 });
 
-let nav = '.sidebar-nav li a';
+$("#user-menu-button").click(function() {
+    $("#user-menu-content").toggle();
+});
 
-$(function(){
-    $(nav).filter(function(){return this.href===location.href}).parent().addClass('active').siblings().removeClass('active')
-    $(nav).click(function(){
-        $(this).parent().addClass('active').siblings().removeClass('active')
-    })
+$("#add-button").click(function() {
+    $("#add-content").toggle();
+});
+
+window.addEventListener('mouseup', function(event){
+    const navbar = document.getElementById('burger-menu');
+    const profile = document.getElementById( 'user-menu-content');
+    const addDropdown = document.getElementById( 'add-content');
+    if (event.target !== navbar && event.target.parentNode !== navbar){
+        navbar.style.display = 'none'
+    }
+    if (event.target !== profile && event.target.parentNode !== profile){
+        profile.style.display = 'none'
+    }
+    if (event.target !== addDropdown && event.target.parentNode !== addDropdown){
+        addDropdown.style.display = 'none'
+    }
 });

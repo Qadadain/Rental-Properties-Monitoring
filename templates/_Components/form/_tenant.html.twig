@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+
+        {{ form_label(form.firstName) }}
+        {{ form_widget(form.firstName, {'attr': {'class': 'form-input'}}) }}
+
+        {{ form_label(form.lastName) }}
+        {{ form_widget(form.lastName, {'attr': {'class': 'form-input'}}) }}
+
+        {{ form_label(form.entry) }}
+        {{ form_widget(form.entry, {'attr': {'class': 'form-input'}}) }}
+
+        {{ form_label(form.rentalProperty) }}
+        {{ form_widget(form.rentalProperty, {'attr': {'class': 'form-input'}}) }}
+
+<div class="flex justify-center mt-10">
+        <button type="submit" class="form-submit">Ajouter</button>
+</div>
+{{ form_end(form) }}

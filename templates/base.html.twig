@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<html lang="FR-fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+    {{ encore_entry_link_tags('app') }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robot" content="noindex, nofollow"/>
+    <link rel="icon" type="image/gif" href="{{ asset('build/images/favicon.ico') }}" />
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+    {% block stylesheets %}
+    {% endblock %}
 
     {% block header %}
-        {% include 'Components/_navbar.html.twig' %}
+        {% include '_Components/_navbar.html.twig' %}
     {% endblock %}
-    </head>
-    <body >
-    <section id="content-wrapper">
-        {% block body %}
-        {% endblock %}
-    </section>
-    </div>
-    </body>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('navbar') }}
-        {% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('navbar') }}
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+{% block javascripts %}
+{% endblock %}
 </html>

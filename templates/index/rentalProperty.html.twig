@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row text-center">
+            <h1>Les Locations</h1>
+        </div>
+{% for rentalProperty in rentalProperties %}
+            <a href="{{ path('rental_property_show', {'slug': rentalProperty.slug}) }}">
+                <div class="card col-3">
+                    <table class="cardcontent">
+                        <tr>
+                            <td style="padding: 7px;">
+                                <div class="bluestick" style="background:black;"></div>
+                            </td>
+                            <td>
+                                <strong class="name"> {{ rentalProperty.name }}</strong>
+                                <p class="data">
+                                    <span style="color: #666">{{ rentalProperty.rentalPropertyType.type }} - {{ rentalProperty.property.name }}</span><br>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 m-10">
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fab fa-3x fa-leanpub leanpub-color"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Compta biens
+                    </h2>
+                    {{ render_chart(propertiesChart) }}
+                    <p class="text-center m-4">{{ sumPropertyAccounting |format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('property_accounting_show_all') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fas fa-3x fa-wallet wallet-color"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Compta locations
+                    </h2>
+                    {{ render_chart(rentalPropertiesChart) }}
+                    <p class="text-center m-4">{{ sumRentalPropertyAccounting |format_currency('EUR', {rounding_mode: 'floor'}) }}</p>
+
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('rental_property_accounting_show_all') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-6 m-10">
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fa fa-3x fa-building building-color"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Nombre de biens
+                    </h2>
+                    <p class="text-center">{{ propertiesCount }}</p>
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('property_index') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+
+
+
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fa fa-3x fa-key key-color"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Nombre de locations
+                    </h2>
+                    <p class="text-center">{{ rentalPropertiesCount }}</p>
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('property_index') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fas fa-3x fa-users cardIcon"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Nombre de locataire
+                    </h2>
+                    <p class="text-center">{{ tenantsCount }}</p>
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('tenant_show') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="border border-solid border-slate-300 rounded-lg">
+                <div class="flex justify-center bg-slate-300 rounded-t-md">
+                    <i class="fa fa-3x fa-file-pdf pdf-color"></i>
+                </div>
+                <div>
+                    <h2 class="h4 text-center m-4">
+                        Nombre de Quittance
+                    </h2>
+                    <p class="text-center">{{ rentReceiptsCount }}</p>
+                </div>
+                <div class="flex justify-center m-4">
+                    <a href="{{ path('tenant_show') }}" class="link">
+                        <i class="fas fa-lg fa-list-ul"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
