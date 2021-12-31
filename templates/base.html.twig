@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="FR-fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     {{ encore_entry_link_tags('app') }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robot" content="noindex, nofollow"/>
+    <link rel="icon" type="image/gif" href="{{ asset('build/images/favicon.ico') }}" />
+
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
     {% block stylesheets %}
