@@ -30,7 +30,6 @@ RUN apt-get update \
 
 RUN apt-get update \
     && apt-get install -y wget gpg apt-utils \
-
     # composer
     && curl -sS https://getcomposer.org/installer -o composer-setup.php \
     && HASH="$(wget -q -O - https://composer.github.io/installer.sig)" \
@@ -55,8 +54,6 @@ WORKDIR /var/www/html
 
 RUN cp .env .env.local && ls -a && cat .env.local
 
-RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/RPM?serverVersion=5.7"' >> .env.local && cat .env.local
-
 RUN composer install
 
 RUN yarn install
@@ -70,9 +67,7 @@ COPY ./docker/local.ini /usr/local/etc/php/conf.d/local.ini
 
 COPY ./docker/conf.d/nginx.conf /etc/nginx/nginx.conf
 
-COPY ./docker/script/init.sh /init.sh
-RUN chmod +x /init.sh
-ENTRYPOINT ["/init.sh"]
+
 RUN chmod 600 /var/www/html/traefik/acme.json
 
 EXPOSE 8080
