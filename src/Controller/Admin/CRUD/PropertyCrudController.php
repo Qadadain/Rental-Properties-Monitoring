@@ -7,6 +7,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use phpDocumentor\Reflection\Types\Integer;
 
 class PropertyCrudController extends AbstractCrudController
 {
@@ -22,6 +24,7 @@ class PropertyCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name', 'Nom :'),
             TextField::new('city', 'Ville :'),
+            IntegerField::new('zipCode', 'Code postal :'),
             TextField::new('address', 'Adresse :'),
             TextField::new('comment', 'Commentaire :'),
         ];
@@ -32,6 +35,6 @@ class PropertyCrudController extends AbstractCrudController
         return $crud
 
             ->setPageTitle('index', 'Localisation')
-            ->setSearchFields(['id', 'name', 'city', 'address', 'comment', 'name']);
+            ->setSearchFields(['id', 'name', 'city', 'zipCode', 'address', 'comment', 'name']);
     }
 }

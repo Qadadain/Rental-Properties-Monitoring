@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/tenant", name="tenant_")
+ * @Route("/locataire", name="tenant_")
  */
 class TenantController extends AbstractController
 {
@@ -21,7 +21,7 @@ class TenantController extends AbstractController
      */
     public function show(EntityManagerInterface $em): Response
     {
-        $tenants = $em->getRepository('App:Tenant')->findAll();
+        $tenants = $em->getRepository('App:Tenant')->getTenantOrderByDate();
 
         return $this->render('show/tenant.html.twig', [
             'user' => $this->getUser(),

@@ -39,9 +39,8 @@ class RentReceiptController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/{locataireFirstName}-{locataireLastName}-{id}", name="show")
+     * @Route("/pdf/pdf/{locataireFirstName}-{locataireLastName}-{id}", name="show")
      */
     public function getRentReceiptByTenant(Tenant $tenant, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
@@ -85,6 +84,4 @@ class RentReceiptController extends AbstractController
             "loyer-$tenant-$date.pdf"
         );
     }
-
-
 }

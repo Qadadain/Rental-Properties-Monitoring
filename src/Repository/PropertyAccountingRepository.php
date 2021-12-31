@@ -35,12 +35,21 @@ class PropertyAccountingRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    public function getPropertySum($label, $propertyId)
+    public function getPropertySumByLabel($label, $propertyId)
     {
         return $this->createQueryBuilder('pa')
             ->select('SUM(pa.value)')
             ->andWhere('pa.label = :label')
             ->setParameter('label', $label)
+            ->andWhere('pa.property = :property')
+            ->setParameter('property', $propertyId)
+            ->getQuery()->getResult();
+    }
+
+    public function getPropertySum($propertyId)
+    {
+        return $this->createQueryBuilder('pa')
+            ->select('SUM(pa.value)')
             ->andWhere('pa.property = :property')
             ->setParameter('property', $propertyId)
             ->getQuery()->getResult();

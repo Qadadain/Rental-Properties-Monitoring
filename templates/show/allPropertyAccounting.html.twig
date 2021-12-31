@@ -3,13 +3,13 @@
 {% block title %}Hello LocationAccountingController!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row d-flex justify-content-center">
+    <div class="container mx-auto">
+        <div class="mt-3 text-center mt-10 font-bold text-4xl">
             <h1>Ligne comptabilité des biens </h1>
         </div>
     </div>
-    <div class="container mt-5">
-        <div id="propertyAccounting">Loading...</div>
+    <div class="container mx-auto mt-5">
+        <div id="propertyAccounting" class="overflow-auto" >Loading...</div>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -46,7 +46,8 @@
                 searching: true,
                 dom: 'lTfgtpi',
                 rowId: 'refId',
-                rowClass: 'ref-row'
+                rowClass: 'ref-row',
+                responsive: true
             });
         });
     </script>

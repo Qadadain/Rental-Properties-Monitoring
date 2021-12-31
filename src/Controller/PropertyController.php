@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\Property;
@@ -32,6 +33,31 @@ class PropertyController extends AbstractController
             'properties' => $properties->findAll(),
         ]);
     }
+    /**
+     * @Route ("/add", name="add")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @param SluggerInterface $slugger
+     * @return RedirectResponse|Response
+     *
+     *
+     */
+
+    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
+    {
+        $property = new Property();
+        $form = $this->createForm(PropertyType::class, $property);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $property->setSlug($slugger->slug(strtolower(strtolower($property->getName()))));
+            $em->persist($property);
+            $em->flush();
+            return $this->redirectToRoute('home_index');
+        }
+        return $this->render('add/property.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{slug}", name="show")
@@ -55,9 +81,11 @@ class PropertyController extends AbstractController
             $labelId = $label->getId();
             $labelColors[] = $label->getColor();
             $labelNames[] = $label->getName();
-            $propertySumByLabel[] = $propertyAccounting->getPropertySum($labelId, $propertyId);
+            $propertySumByLabel[] = $propertyAccounting->getPropertySumByLabel($labelId, $propertyId);
         }
-
+        $propertySum = $propertyAccounting->getPropertySum($propertyId);
+        $propertySum = call_user_func_array('array_merge',$propertySum);
+        $propertySum = round($propertySum[0], 2);
 
         $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
         $propertySumByLabel =  call_user_func_array('array_merge',$propertySumByLabel);
@@ -78,33 +106,9 @@ class PropertyController extends AbstractController
         return $this->render('show/property.html.twig', [
             'property' => $property,
             'rentalProperties' => $rentalProperties,
+            'propertySum' => $propertySum,
             'propertyAccountingChart' => $propertyAccountingChart,
         ]);
     }
-
-
-    /**
-     * @Route ("/add", name="add")
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @param SluggerInterface $slugger
-     * @return RedirectResponse|Response
-     */
-    public function new(EntityManagerInterface $em, Request $request, SluggerInterface $slugger): Response
-    {
-        $property = new Property();
-        $form = $this->createForm(PropertyType::class, $property);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $property->setSlug($slugger->slug(strtolower(strtolower($property->getName()))));
-            $em->persist($property);
-            $em->flush();
-            return $this->redirectToRoute('home_index');
-        }
-        return $this->render('add/property.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
 
 }

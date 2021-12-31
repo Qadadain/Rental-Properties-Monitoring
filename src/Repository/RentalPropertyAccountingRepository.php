@@ -35,12 +35,21 @@ class RentalPropertyAccountingRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    public function getRentalPropertySum($label, $rentalPropertyId)
+    public function getRentalPropertySumByLabel($label, $rentalPropertyId)
     {
         return $this->createQueryBuilder('rpa')
             ->select('SUM(rpa.value)')
             ->andWhere('rpa.label = :label')
             ->setParameter('label', $label)
+            ->andWhere('rpa.rentalProperty = :rentalProperty')
+            ->setParameter('rentalProperty', $rentalPropertyId)
+            ->getQuery()->getResult();
+    }
+
+    public function getRentalPropertySum($rentalPropertyId)
+    {
+        return $this->createQueryBuilder('rpa')
+            ->select('SUM(rpa.value)')
             ->andWhere('rpa.rentalProperty = :rentalProperty')
             ->setParameter('rentalProperty', $rentalPropertyId)
             ->getQuery()->getResult();

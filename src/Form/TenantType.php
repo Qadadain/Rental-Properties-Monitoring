@@ -27,12 +27,6 @@ class TenantType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['class' => 'js-datepicker'],
             ])
-            ->add('leaveAccommodation', DateType::class, [
-                'label' => 'Sortie :',
-                'required' => false,
-                'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker'],
-            ])
             ->add('rentalProperty', EntityType::class, [
                 'label' => 'Location  :',
                 'class' => RentalProperty::class,
