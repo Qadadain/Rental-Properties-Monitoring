@@ -40,7 +40,7 @@ services:
       # http
       - "traefik.http.routers.httprpm.entrypoints=web"
       - "traefik.http.routers.httprpm.rule=Host(`sci-mg-lietin.adadain.com`)"
-      - "traefik.http.routers.httprpm.service=httpcrook-service"
+      - "traefik.http.routers.httprpm.service=httpcrpm-service"
       - "traefik.http.services.httprpm-service.loadbalancer.server.port=8080"
       # Middlewares
       # Redirect these routes to https
@@ -51,7 +51,7 @@ services:
 
       # https
       - "traefik.http.routers.httpsrpm.rule=Host(`sci-mg-lietin.adadain.com`)"
-      - "traefik.http.routers.httpsrpm.service=httpscrook-service"
+      - "traefik.http.routers.httpsrpm.service=httpsrpm-service"
       - "traefik.http.services.httpsrpm-service.loadbalancer.server.port=8080"
       # SSL
       - "traefik.http.routers.httpsrpm.tls=true"
