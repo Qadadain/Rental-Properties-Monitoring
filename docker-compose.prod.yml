@@ -40,7 +40,7 @@ services:
       # http
       - "traefik.http.routers.httprpm.entrypoints=web"
       - "traefik.http.routers.httprpm.rule=Host(`sci-mg-lietin.adadain.com`)"
-      - "traefik.http.routers.httprpm.service=httpcrpm-service"
+      - "traefik.http.routers.httprpm.service=httprpm-service"
       - "traefik.http.services.httprpm-service.loadbalancer.server.port=8080"
       # Middlewares
       # Redirect these routes to https
